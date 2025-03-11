@@ -28,6 +28,7 @@ This Python program provides a simple command-line currency converter. It uses t
 
 ## 📝 Example Usage 📝
 
+```bash
 Currency Converter Menu:
 
 List all available currencies
@@ -67,6 +68,7 @@ Currency Converter Menu:
 q. Quit
 Enter your choice: q
 Exiting the program. Goodbye!
+```
 
 ## 📦 Dependencies 📦
 
