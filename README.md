@@ -85,3 +85,9 @@ Exiting the program. Goodbye!
 ## 🙌 Contributing 🙌
 
 Contributions are welcome! Feel free to submit pull requests or open issues.
+
+---
+
+## License
+This project is licensed as **proprietary and confidential**.  
+**You may not reuse, modify, or redistribute any part of this code.**
