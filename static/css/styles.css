@@ -1,0 +1,438 @@
+/* Variables */
+:root {
+    --primary-color: #1a1a1a;
+    --secondary-color: #4CAF50;
+    --accent-color: #6200ee;
+    --light-color: #f5f5f5;
+    --dark-color: #121212;
+    --text-color: #ffffff;
+    --text-secondary: #bbbbbb;
+    --card-bg: #1e1e1e;
+    --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    --transition: all 0.3s ease;
+    --border-radius: 8px;
+    --error-color: #CF6679;
+    --success-color: #4CAF50;
+}
+
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--dark-color);
+    min-height: 100vh;
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header Styles */
+.app-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.app-header h1 {
+    font-size: 2.5rem;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.5px;
+}
+
+.app-header h1 i {
+    color: var(--secondary-color);
+    margin-right: 0.5rem;
+}
+
+.app-header p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+}
+
+/* Main Content Styles */
+.converter-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.options-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.option-card {
+    flex: 1;
+    background-color: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    text-align: center;
+    transition: var(--transition);
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.option-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--secondary-color);
+}
+
+.option-card.active {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 15px rgba(76, 175, 80, 0.3);
+}
+
+.option-card i {
+    font-size: 2rem;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.option-card h3 {
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+}
+
+.option-card p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.card {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.result-card {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Input Styles */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.input-group label {
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 0.9rem;
+}
+
+.amount-input {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.amount-input i {
+    position: absolute;
+    left: 1rem;
+    color: var(--secondary-color);
+    z-index: 1;
+}
+
+input[type="number"], input[type="text"] {
+    width: 100%;
+    padding: 1rem 1rem 1rem 2.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--text-color);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+input[type="number"]:focus, input[type="text"]:focus {
+    border-color: var(--secondary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+}
+
+/* Currency Selection Layout */
+.currency-selection {
+    display: flex;
+    position: relative;
+    align-items: center;
+    gap: 2.5rem; /* Increase gap to make room for the swap button */
+    margin: 1.5rem 0;
+}
+
+/* Swap Button Positioning */
+.swap-btn {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    background-color: var(--secondary-color);
+    color: var(--dark-color);
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
+    transition: var(--transition);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+.swap-btn:hover {
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    transform: translate(-50%, -50%) rotate(180deg);
+}
+
+/* Select Styles */
+.select-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+select {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--text-color);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: var(--transition);
+    appearance: none;
+    cursor: pointer;
+    padding-right: 2.5rem;
+}
+
+select:focus {
+    border-color: var(--secondary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+}
+
+/* Custom select dropdown styling */
+select option {
+    background-color: white;
+    color: #1a1a1a;
+    padding: 10px;
+}
+
+.select-wrapper::after {
+    content: "\f078";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--secondary-color);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Button Styles */
+.convert-btn, .action-btn {
+    background-color: var(--secondary-color);
+    color: var(--dark-color);
+    border: none;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    font-weight: 600;
+}
+
+.convert-btn:hover, .action-btn:hover {
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    transform: translateY(-2px);
+}
+
+/* Result Styles */
+.section-container {
+    display: none;
+}
+
+.section-container.active {
+    display: block;
+}
+
+.result-container {
+    transition: var(--transition);
+}
+
+.result-container.hidden {
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    margin: 0;
+}
+
+.result-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+    margin: 1.5rem 0;
+}
+
+.exchange-rate {
+    font-size: 1rem;
+    color: var(--text-color);
+    opacity: 0.9;
+    margin-bottom: 0.5rem;
+}
+
+.timestamp {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.result-card h2 {
+    color: var(--text-color);
+    position: relative;
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+
+.result-card h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background-color: var(--secondary-color);
+    border-radius: 2px;
+}
+
+/* Country List Styles */
+.countries-list {
+    max-height: 400px;
+    overflow-y: auto;
+    margin-top: 1rem;
+    border-radius: var(--border-radius);
+    background-color: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.country-item {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 1.2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.country-item:last-child {
+    border-bottom: none;
+}
+
+.country-code {
+    font-weight: bold;
+    width: 80px;
+    color: var(--secondary-color);
+}
+
+.country-name {
+    color: var(--text-color);
+    font-weight: normal;
+}
+
+/* Card styles for the countries section */
+#countries-section .card h2,
+#countries-section .card p {
+    color: var(--text-color);
+}
+
+/* Footer Styles */
+.app-footer {
+    margin-top: 2rem;
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Custom Scrollbar for all scrollable elements */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: white;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--secondary-color);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-color);
+}
+
+/* Media query adjustment */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    .options-container {
+        flex-direction: column;
+    }
+    
+    .currency-selection {
+        flex-direction: column;
+        gap: 3rem; /* Increase for mobile */
+    }
+    
+    .swap-btn {
+        top: calc(50% - 0.5rem);
+        transform: translateX(-50%) rotate(90deg);
+    }
+    
+    .swap-btn:hover {
+        transform: translateX(-50%) rotate(270deg);
+    }
+} 

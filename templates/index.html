@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter | Dark Theme</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="app-header">
+            <h1><i class="fas fa-money-bill-wave"></i> Currency Exchange</h1>
+            <p>Fast, accurate currency information in real-time</p>
+        </header>
+
+        <main class="converter-panel">
+            <div class="options-container">
+                <div class="option-card" data-section="countries-section">
+                    <i class="fas fa-globe-americas"></i>
+                    <h3>All Currencies</h3>
+                    <p>View all available currencies and codes</p>
+                </div>
+                <div class="option-card" data-section="rate-section">
+                    <i class="fas fa-exchange-alt"></i>
+                    <h3>Exchange Rates</h3>
+                    <p>Get the latest exchange rates</p>
+                </div>
+                <div class="option-card" data-section="convert-section">
+                    <i class="fas fa-calculator"></i>
+                    <h3>Currency Conversion</h3>
+                    <p>Convert between currencies</p>
+                </div>
+            </div>
+
+            <!-- Countries List Section -->
+            <div id="countries-section" class="section-container">
+                <div class="card">
+                    <h2>All Available Currencies</h2>
+                    <p>Browse all available currencies and their codes.</p>
+                    
+                    <div class="countries-list">
+                        {% for currency in currency_data %}
+                        <div class="country-item">
+                            <div class="country-code">{{ currency.code }}</div>
+                            <div class="country-name">{{ currency.name }}</div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Exchange Rate Section -->
+            <div id="rate-section" class="section-container">
+                <div class="card">
+                    <div class="currency-selection">
+                        <div class="input-group">
+                            <label for="base-currency">Base Currency</label>
+                            <div class="select-wrapper">
+                                <select id="base-currency">
+                                    {% for currency in currencies %}
+                                    <option value="{{ currency }}" {% if currency == 'USD' %}selected{% endif %}>{{ currency }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <button id="rate-swap-button" class="swap-btn" title="Swap currencies">
+                            <i class="fas fa-exchange-alt"></i>
+                        </button>
+
+                        <div class="input-group">
+                            <label for="target-currency">Target Currency</label>
+                            <div class="select-wrapper">
+                                <select id="target-currency">
+                                    {% for currency in currencies %}
+                                    <option value="{{ currency }}" {% if currency == 'EUR' %}selected{% endif %}>{{ currency }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="get-rate-button" class="action-btn">
+                        <i class="fas fa-sync-alt"></i> Get Exchange Rate
+                    </button>
+                </div>
+
+                <div class="result-container hidden" id="rate-result-container">
+                    <div class="result-card">
+                        <h2>Exchange Rate</h2>
+                        <div class="result-value" id="rate-result-value"></div>
+                        <div class="timestamp" id="rate-timestamp"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conversion Section -->
+            <div id="convert-section" class="section-container">
+                <div class="card">
+                    <div class="input-group">
+                        <label for="amount">Amount</label>
+                        <div class="amount-input">
+                            <i class="fas fa-coins"></i>
+                            <input type="number" id="amount" placeholder="Enter amount" min="0" step="0.01">
+                        </div>
+                    </div>
+
+                    <div class="currency-selection">
+                        <div class="input-group">
+                            <label for="from-currency">From</label>
+                            <div class="select-wrapper">
+                                <select id="from-currency">
+                                    {% for currency in currencies %}
+                                    <option value="{{ currency }}" {% if currency == 'USD' %}selected{% endif %}>{{ currency }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <button id="swap-button" class="swap-btn" title="Swap currencies">
+                            <i class="fas fa-exchange-alt"></i>
+                        </button>
+
+                        <div class="input-group">
+                            <label for="to-currency">To</label>
+                            <div class="select-wrapper">
+                                <select id="to-currency">
+                                    {% for currency in currencies %}
+                                    <option value="{{ currency }}" {% if currency == 'EUR' %}selected{% endif %}>{{ currency }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="convert-button" class="convert-btn">
+                        <i class="fas fa-calculator"></i> Convert
+                    </button>
+                </div>
+
+                <div class="result-container hidden" id="conversion-result-container">
+                    <div class="result-card">
+                        <h2>Conversion Result</h2>
+                        <div class="result-value" id="conversion-result-value"></div>
+                        <div class="exchange-rate" id="conversion-exchange-rate"></div>
+                        <div class="timestamp" id="conversion-timestamp"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="app-footer">
+            <p>Powered by ExchangeRate-API &copy; <span id="current-year"></span></p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html> 
